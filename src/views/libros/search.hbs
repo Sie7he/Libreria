@@ -1,0 +1,43 @@
+<div class="container p-4">
+
+    <div class="row">
+        {{#each libros}}
+        <div class="col-sm-3 mt-4">
+            <div class="card mx-auto" style="width: 14rem; border:hidden;">
+
+                <div class="card-body">
+                    <a href="/libros/detalle/{{ID}}">
+                    
+                    <img class="card-img-top" src="{{IMAGEN}}" witdh="200" height="210">
+                   
+                        
+                    </a>
+                </div>
+              <div class="pie" height="100px">
+                <div class="product-name">
+                <strong class="product-item-name">
+									{{NOMBRE}}
+									</strong>
+                  <div class="fondo-autor">
+                    <span class="autor-libro"><p>{{AUTOR}}</p></span>
+                  </div>
+                  </div>
+                  <span data-price-amount="{{PRECIO}}" data-price-type="finalPrice" class="price-wrapper ">
+                    <span class="price"> ${{PRECIO}} </span>    
+                  </span>
+                 
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No se encontró ningun libro con este nombre.</p>
+                <a href="/">Volver</a>
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+</div>

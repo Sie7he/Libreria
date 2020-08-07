@@ -1,0 +1,46 @@
+
+<div class="container p-4 mx-auto">
+    <h2>Usuarios</h2>
+    <br>
+<table class="table table-hover" id="tablaUsuario">
+  
+    <tbody>
+   
+ <form class="form-inline my-2 my-lg-0" action="buscar_usuario">
+                        
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" id="buscar_usuario" placeholder="Buscar Usuario" />
+                          
+
+                        </div>
+                    </form>
+                    <br>
+  <thead class="thead-dark">
+    <th>RUT</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Correo</th>
+    <th>Rol</th>
+      </thead>  
+    
+
+    {{#each usuarios}}
+        <tr>
+            <td>  {{rut}}</td>
+            <td>  {{nombre}}</td>
+            <td>  {{apellido}}</td>
+            <td>  {{correo}}</td>
+            <td>  {{rol}}</td>
+           
+
+            <td>  <a href='editarUsuario/{{rut}}' class="btn btn-info">Editar</a></td>
+
+        </tr>
+    {{/each}}
+    
+
+</tbody>
+
+</table>
+</div>

@@ -1,0 +1,70 @@
+
+<div class="container p-4">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+     <a href="/libros/detalle/15"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/b/e/benner_pla_fchl_2.png" alt="First slide"  width="97%"></a>
+    </div>
+    <div class="carousel-item">
+     <a href="/libros/detalle/16"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/b/a/banner_el_poder_del_clic_fcl_web.jpg" alt="Second slide" width="97%"></a>
+    </div>
+    <div class="carousel-item">
+     <a href="/libros/detalle/17"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/f/e/feriachilena_5.png" alt="Third slide" width="97%"></a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+    <div class="row">
+        {{#each libros}}
+        <div class="col-sm-3 mt-4">
+            <div class="card mx-auto" style="width: 14rem; border:hidden;">
+
+                <div class="card-body">
+                    <a href="/libros/detalle/{{ID}}">
+                    
+                    <img class="card-img-top" src="{{IMAGEN}}" witdh="200" height="250">
+                   
+                        
+                    </a>
+                </div>
+              <div class="pie" height="100px">
+                <div class="product-name">
+                <strong class="product-item-name">
+									{{NOMBRE}}
+									</strong>
+                  <div class="fondo-autor">
+                    <span class="autor-libro"><p>{{AUTOR}}</p></span>
+                  </div>
+                  </div>
+                  <span data-price-amount="{{PRECIO}}" data-price-type="finalPrice" class="price-wrapper ">
+                    <span class="price"> ${{PRECIO}} </span>    
+                  </span>
+                 
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No se encontró ningun libro con este nombre.</p>
+                <a href="/">Volver</a>
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+
+</div>

@@ -1,0 +1,68 @@
+
+<div class="container-fluid p-4">
+
+       <div class="max border 1 p-2" ></div>
+
+         <div class="row">
+
+         <div class="col-xs-12 col-sm-4 col-md-4 "style="display: flex ;justify-content: center;" >
+        <img  src="{{libro.IMAGEN}}" witdh="210px" height="400px"> 
+        </div>
+        
+        <div class="col-xs-12 col-sm-4 col-md-3 border 1">
+          <div class="card" style="width: 21rem; border: none; text-align: justify;">
+  <div class="card-body">
+    <h5 class="card-title">{{libro.NOMBRE}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{libro.AUTOR}}</h6>
+    <p class="card-text align-justify"> {{libro.SIPNOPSIS}}</p>
+  </div>
+</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3">
+        
+         <div class="card text-center" style="border: none;">
+        <form action="/libros/detalle/{{libro.ID}}" method="POST">
+         <div class="box-info-product">
+            <div class="form-group">
+                <label style="color: green;">Precio ${{libro.PRECIO}}</label>
+                <input type="hidden" name="PRECIO" id="PRECIO" value="{{libro.PRECIO}}">
+            </div>
+            <div class="form-group">
+                <label name="STOCK" style="font-size: 21px;">Stock: {{libro.STOCK}}</label>
+            </div>
+            <div class="product_attributes clearfix">
+            {{#equal libro.STOCK 0 operator= "=="}}
+             <div class="form-group">
+                 <label for="CANTIDAD">Cantidad:</label>
+                 <input type="number" class="input-cantidad" value="1" name="CANTIDAD" id="CANTIDAD" min="1" max="{{libro.STOCK}}" disabled >
+                 </div>
+            <div class="form-group">
+                 <label style="color: green; font-size:21px;">TOTAL :</label>
+                 <span class="input-total" id="spanPrecio">$0</span>
+                 </div>
+            </div>
+            <div class="form-group">
+            <button class="btn btn-danger btn-lg btn-block"  disabled>Agotado</button>
+            {{/equal}}
+            {{#equal libro.STOCK 0 operator= ">"}}
+            <div class="form-group">
+                 <label for="CANTIDAD">Cantidad:</label>
+                 <input type="number" class="input-cantidad" value="1" name="CANTIDAD" id="CANTIDAD" min="1" max="{{libro.STOCK}}" >
+                 </div>
+                  <div class="form-group">
+                 <label style="color: green; font-size:21px;">TOTAL :</label>
+                 <span class="input-total" id="spanPrecio">${{libro.PRECIO}}</span>
+                 </div>
+            <button class="btn btn-success btn-lg btn-block">Comprar</button>
+            {{/equal}}
+            </div>
+            <a href="/" class="btn btn-primary btn-block">VOLVER <i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+            </div>
+        </form>
+         </div>
+         </div>
+    </div>
+        
+</div>
+        <div class="min border 1 p-2" ></div>

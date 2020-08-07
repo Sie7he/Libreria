@@ -1,0 +1,37 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+                           <h2>Registrarse</h2>
+           <div class="card">
+                <div class="card-body">
+                 <form action="/signup" method="POST" onsubmit="return validarFormulario()">
+                     <div class="form-group">
+                         <input type="text" class="form-control"  id=" RUT" name="RUT" placeholder="RUT" oninput="checkRut(this)"  required>
+                         <div id="rut_error" style="font-size:14px; color:#FF0000;"></div>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Nombre" required>
+                         <div id="nombre_error" style="font-size:14px; color:#FF0000;"></div>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" class="form-control" id="APELLIDO" name="APELLIDO" placeholder="Apellido" required>
+                         <div id="apellido_error" style="font-size:14px; color:#FF0000;"></div>
+
+                     </div>
+                     <div class="form-group">
+                         <input type="email" class="form-control" name="CORREO" placeholder="Correo" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="password" class="form-control" name="PASS" placeholder="Contraseña" required>
+                     </div>  
+                     <div class="form-group">
+                         <button class="btn btn-success btn-block" id="btnvalidar">
+                             Registrarse
+                         </button>
+                     </div>
+                 </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

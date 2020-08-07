@@ -1,0 +1,48 @@
+
+<div class="container p-4 mx-auto">
+    <h2>Libros</h2>
+    <br>
+<table class="table table-hover" id="tablaUsuario">
+  
+    <tbody>
+   
+ <form class="form-inline my-2 my-lg-0" action="buscar_usuario">
+                        
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" id="buscar_usuario" placeholder="Buscar Libro" />
+                          
+
+                        </div>
+                    </form>
+                    <br>
+  <thead class="thead-dark">
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Autor</th>
+    <th>Stock</th>
+    <th>Precio</th>
+    <th>ISBN</th>
+      </thead>  
+    
+
+    {{#each librosEMP}}
+        <tr>
+            <td>  {{ID}}</td>
+            <td>  {{NOMBRE}}</td>
+            <td>  {{AUTOR}}</td>
+            <td>  {{STOCK}}</td>
+            <td>  {{PRECIO}}</td>
+            <td>  {{ISBN}}</td>
+           
+
+            <td>  <a href='editar/{{ID}}' class="btn btn-info">Editar</a></td>
+
+        </tr>
+    {{/each}}
+    
+
+</tbody>
+
+</table>
+</div>

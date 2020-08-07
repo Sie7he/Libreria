@@ -1,0 +1,38 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+           <div class="card">
+                <div class="card-body">
+                 <form action="/libros/editar/{{l.ID}}" method="POST">
+                     <div class="form-group">
+                         <input type="text" class="form-control" name="NOMBRE" placeholder="Nombre" value="{{l.NOMBRE}}" autofocus>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" class="form-control" name="AUTOR" placeholder="Autor" value="{{l.AUTOR}}">
+                     </div>
+                     <div class="form-group">
+                         <input type="number" class="form-control" name="PRECIO" placeholder="Precio"   min="0" value="{{l.PRECIO}}">
+                     </div>
+                     <div class="form-group">
+                         <input type="number" class="form-control" name="STOCK" placeholder="Stock" min="0" value="{{l.STOCK}}">
+                     </div>
+                     <div class="form-group">
+                         <textarea name="SIPNOPSIS" rows="2" class="form-control" >{{l.SIPNOPSIS}}</textarea>
+                     </div>
+                    <div class="form-group">
+                         <input type="url" class="form-control" name="IMAGEN" placeholder="URL" value="{{l.IMAGEN}}">
+                     </div>
+                     <div class="form-group">
+                         <input type="text" class="form-control" name="ISBN" placeholder="ISBN" value="{{l.ISBN}}">
+                     </div>
+                     <div class="form-group">
+                         <button class="btn btn-success btn-block">
+                             Enviar
+                         </button>
+                     </div>
+                 </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
