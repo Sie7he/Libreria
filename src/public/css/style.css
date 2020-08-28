@@ -1,13 +1,41 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
 
+.footer  {
+    color: white;
+    background-color: #009B94;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 287px;
 
+}
+  .pie{
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+    background: 0 0;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+}
 .navbar {
-    background: black !important;
+    background: #009B94 !important;
+}
+
+h2{
+    color: #009B94 !important;
+
 }
 
 .nav-link {
     color: #fff !important;
 }
-
 
     button{
         color:black;
@@ -26,13 +54,12 @@
         transform:none;
     }
 
-#CANTIDAD label{
-        display: block;
-        margin-bottom: 7px;
-    }
-.input-cantidad{
+.carrito{
+    border: solid #f7f7f9;
+}
+.CANTIDAD{
     
-        width: 78px;
+        width: 70px;
         height: 27px;
         padding: 0 6px;
         border: 1px solid #d6d4d4;
@@ -51,6 +78,10 @@
     color: green;
 }
 
+img{
+    transition: all .9s ease;
+}
+
 img:hover{ 
     transition:all .9s ease;
     transform: scale(1.1)
@@ -61,25 +92,12 @@ img:hover{
 }
 
 
-.footer{
-    background-color:black;
-    color:white;
-}
 
 .navbar-brand{
     font-family: 'Pacifico', cursive;
     font-size: 28px;
 }
 
-.pie{
-    padding: 10px;
-    display: inline-block;
-    width: 100%;
-    background: 0 0;
-    text-align: center;
-    position: relative;
-    margin-bottom: 10px;
-}
 
 .product-name {
     margin-top: 2px;
@@ -93,7 +111,7 @@ img:hover{
 
 }
 .fondo-autor {
-    height: 20px;
+    height: 30px;
     font-size: 14px;
 }
 
@@ -105,6 +123,30 @@ img:hover{
 
 
     }
+
+    .cuenta {
+        text-align: center;
+        position: absolute;
+        display: inline-block;
+        line-height: 1;
+        padding: 0;
+        color: #fff;
+        left: 20%;
+        bottom: 3%;
+    }
+    .cuenta #dias, #horas, #minutos, #segundos {
+        display: block;
+        float: left;
+        margin: 0 5px;
+        font-size: 38px;
+        font-weight: 100;
+        border-radius: 2px;
+        padding: 5px;
+        min-width: 50px;
+        border-radius: 5px;
+        background-color: #009ce0;
+    }
+
 
 .col {
     width: 100%;
@@ -129,3 +171,15 @@ word-wrap: break-word;
     box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.05);
     padding: 19px 19px 17px;
 }
+
+.faicons {
+    font-size:70px;
+
+}
+.fa-instagram {
+    background: #cccbcc;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

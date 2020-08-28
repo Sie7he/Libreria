@@ -6,7 +6,7 @@
                 <div class="card-body">
                  <form action="/signup" method="POST" onsubmit="return validarFormulario()">
                      <div class="form-group">
-                         <input type="text" class="form-control"  id=" RUT" name="RUT" placeholder="RUT" oninput="checkRut(this)"  required>
+                         <input type="text" class="form-control"  id=" RUT" name="RUT" placeholder="RUT Ej: 123456789" oninput="checkRut(this)"  required>
                          <div id="rut_error" style="font-size:14px; color:#FF0000;"></div>
                      </div>
                      <div class="form-group">
@@ -16,6 +16,21 @@
                      <div class="form-group">
                          <input type="text" class="form-control" id="APELLIDO" name="APELLIDO" placeholder="Apellido" required>
                          <div id="apellido_error" style="font-size:14px; color:#FF0000;"></div>
+
+                     </div>
+                     <div class="form-group">
+                                                <select id="region" onclick="cargar_datos()">
+                           <option value=''>Seleccione Su Región...</option>
+
+                         {{#each datos}}
+                          <option value=''>datos.n</option>
+
+                                {{/each}}
+
+                       </select>
+                     </div>
+                      <div class="form-group">
+                         <input type="text" class="form-control"  name="DIRECCION" placeholder="Direccion" required>
 
                      </div>
                      <div class="form-group">
@@ -35,3 +50,4 @@
         </div>
     </div>
 </div>
+   {{>footer}}

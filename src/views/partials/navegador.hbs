@@ -1,7 +1,7 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
         <a class="navbar-brand" href="/">
         <h1 class="logo"></h1>
@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0" action="/libros/search/:n" method="GET">
+                    <form action="/libros/search/:n" method="GET">
                         <div class="input-group">
 
                             <input type="text" class="form-control" name="n" placeholder="Buscar Libro..." />
@@ -41,6 +41,7 @@
           <a class="nav-link" href="/ventas/pedido">Ventas</a>
         </li>
                 {{/equal}}
+            
                 {{#equal user.rol 1 operator= "=="}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -56,11 +57,15 @@
                 </li>
                 {{/equal}}
               
-                
+                   <li class="nav-item">
+                          <a class="nav-link" href="/carrito">Carrito<i class="fas fa-shopping-cart"></i></a>
+                  </li>
                  <li class"nav-item">
+                             </div>
+                </div>
+
         <a class="nav-link" href="/logout">Cerrar Sesion</a>
       </li>
-                </div>
              {{else}}    
         <li class="nav-item">
           <a class="nav-link" href="/signin">Iniciar Sesión</a>
@@ -70,7 +75,6 @@
         </li>
          {{/if}}
             </ul>
-        </div>
                
 </nav>
 

@@ -7,7 +7,7 @@ const session = require('express-session');
 const MYSQLStore = require('express-mysql-session');
 const passport = require('passport');
 const {database} = require('./keys');
-
+const https = require('https');
 
 //inicializacion
 
@@ -18,6 +18,7 @@ require('./lib/passport');
 
 
 app.set('port', process.env.PORT || 3000);
+
 app.set('views', path.join(__dirname,'views'));
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -33,8 +34,8 @@ app.set('view engine', '.hbs');
 app.use(session({
     secret: 'sesion',
     resave: false,
-    saveUninitialized: false
-
+    saveUninitialized: false,
+    store: new MYSQLStore(database)
 }));
 app.use(flash());
 app.use(morgan('dev'));
@@ -49,7 +50,9 @@ app.use((req,res,next) =>{
 
 app.locals.success = req.flash('success');
 app.locals.message = req.flash('message');
-app.locals.user = req.user;
+res.locals.user = req.user;
+res.locals.session = req.session.cart;
+
 next();
 
 });
@@ -57,6 +60,7 @@ next();
 //Rutas
 app.use(require('./routes'));
 app.use(require('./routes/autentificacion'));
+app.use(require('./routes/carrito'));
 app.use('/usuarios',require('./routes/usuarios'));
 app.use('/libros',require('./routes/libros'));
 app.use('/ventas',require('./routes/ventas'));
@@ -71,3 +75,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () =>{
     console.log('Server on port', app.get('port'));
 });
+
+
+

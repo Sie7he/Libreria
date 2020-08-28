@@ -73,12 +73,10 @@ function validar(texto){
     
     if (validar(nombre)===false){
      document.getElementById("nombre_error").innerHTML = "Debe insertar solo letras";
-     nombre.setCustomValidity('Nombre Inválido');
         setInterval(function(){document.getElementById("nombre_error").innerHTML = "";},4000);
       return false;
     } else if(validar(apellido)===false){
         document.getElementById("apellido_error").innerHTML = "Debe insertar solo letras";
-        nombre.setCustomValidity('Apellido Inválido');
         setInterval(function(){document.getElementById("apellido_error").innerHTML = "";},4000);
       return false;
     } 

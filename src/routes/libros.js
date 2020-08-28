@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const { response } = require('express');
 const { isLoggedIn, isADM, isAut } = require('../lib/auth');
-
-
+const { session } = require('passport');
+var cart = {};
 
 router.get('/agregar',isAut, (req,res) =>{
     res.render('libros/agregar');
@@ -20,10 +19,10 @@ router.get('/lista', async (req,res) =>{
 luego llamamos a un procedimiento almacenado para agregar libros pasandole los parámetros necesarios
 y ocupamos los signos de interrogación como parametros para evitar SQL Injection*/
 router.post('/agregar', isAut, async (req,res) => {
-    const {NOMBRE,AUTOR,IMAGEN,SIPNOPSIS,PRECIO,STOCK,ISBN} = req.body;
-    await pool.query('call AGREGAR_LIBROS(?,?,?,?,?,?,?)',[AUTOR,IMAGEN,NOMBRE,PRECIO,STOCK,SIPNOPSIS,ISBN]);
+    const {NOMBRE,AUTOR,IMAGEN,SINOPSIS,PRECIO,STOCK,ISBN} = req.body;
+    await pool.query('call AGREGAR_LIBROS(?,?,?,?,?,?,?)',[AUTOR,IMAGEN,NOMBRE,PRECIO,STOCK,SINOPSIS,ISBN]);
     req.flash('success', 'Libro Guardado Correctamente');
-    res.redirect('/');
+    res.redirect('/libros/lista');
 });
 
 /* Realizamos una busqueda donde usamos una funcion para concatenar y asi podemos buscar a través del "input search" 
@@ -37,12 +36,25 @@ router.get('/search/:n', async (req,res) =>{
 
 router.get('/detalle/:id', async (req,res) =>{
     const {id} = req.params;
-    const libro = await pool.query("SELECT ID,NOMBRE,AUTOR,IMAGEN,STOCK,SIPNOPSIS, REPLACE(FORMAT(PRECIO,0), ',', '.') AS PRECIO from libros where id = ?",[id]);
+    const libro = await pool.query("SELECT ID,NOMBRE,AUTOR,IMAGEN,STOCK,SINOPSIS, REPLACE(FORMAT(PRECIO,0), ',', '.') AS PRECIO from libros where id = ?",[id]);
     res.render('libros/detalle_libro',{libro : libro[0]});
  });
+ 
+
 
  // Realizamos la compra a través de un procedimimento almacenado
  router.post('/detalle/:id', isLoggedIn, async (req,res) =>{
+    cart = req.session.cart;
+   
+    if (!cart) {
+        cart = req.session.cart = {}
+    }
+    var id = req.params.id;
+    cart[id] = (cart[id] || 0);
+    res.redirect('/carrito');
+});
+
+   /*
     const {PRECIO,CANTIDAD} = req.body;
     const LIBRO = req.params.id;
     const RUT = req.user.rut;
@@ -50,8 +62,9 @@ router.get('/detalle/:id', async (req,res) =>{
     await pool.query('CALL PEDIDO (?,?,?,?,?)',[null,RUT,LIBRO,PRECIO,CANTIDAD]);
     req.flash('success', 'Gracias Por Su Compra',nom);
     res.redirect('/ventas/boleta');
-  
- });
+  */
+
+
 
  router.get('/editar/:id', async (req,res) =>{
     const {id} = req.params;
@@ -62,8 +75,8 @@ router.get('/detalle/:id', async (req,res) =>{
  //Editamos el libro a través de un procedimiento almacenado
 router.post('/editar/:id', async (req, res) => {
     const { id } = req.params;
-    const {NOMBRE,AUTOR,IMAGEN,SIPNOPSIS,PRECIO,STOCK,ISBN} = req.body;
-    await pool.query('call ACTUALIZAR_LIBRO(?,?,?,?,?,?,?,?)',[id,NOMBRE,AUTOR,IMAGEN,SIPNOPSIS,PRECIO,STOCK,ISBN]);
+    const {NOMBRE,AUTOR,IMAGEN,SINOPSIS,PRECIO,STOCK,ISBN} = req.body;
+    await pool.query('call ACTUALIZAR_LIBRO(?,?,?,?,?,?,?,?)',[id,NOMBRE,AUTOR,IMAGEN,SINOPSIS,PRECIO,STOCK,ISBN]);
     req.flash('success','Libro Actualizado Correctamente')
     res.redirect('/libros/lista');
 });

@@ -1,5 +1,20 @@
+const bcrypt = require('bcryptjs');
+
 const helpers = {};
 
+helpers.encryptPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
+};
+
+helpers.matchPassword = async (password, savedPassword) => {
+  try {
+    return await bcrypt.compare(password, savedPassword);
+  } catch (e) {
+    console.log(e)
+  }
+};
 
 /*Este es un "helper" que ocuparemos en algunas vistas para ocultar o deshabilitar botones
 ya que el If de handlebars no sirve en este caso */

@@ -1,0 +1,46 @@
+<div class="container p-4 mx-auto">
+
+<h2>Carrito de Compra</h2>
+<div class="carrito">
+ <form method="POST">
+<table id="miTabla" class="table table-hover" >
+    <thead>
+        <tr>
+            <th></th>
+            <th>Libro</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4"><strong>Total</strong></td>
+            <td><strong><span id="resultado_total"></span></strong></td>
+
+        </tr>
+    </tfoot>
+    <tbody>
+      {{#each carrito}}
+        <tr>
+            <td><img src="{{IMAGEN}}" width="70px"></td>
+            <td>{{NOMBRE}}</td>
+            <td><input type="number" name="CANTIDAD" class="CANTIDAD" value="1" min="1" max="{{STOCK}}"></td>
+            <td class="precio">{{PRECIO}}</td>
+            <td class="subtotal">{{PRECIO}}</td>
+            <input type="hidden" id="PRECIO" value="{{PRECIO}}">
+            <td><a href="/eliminarLibro/{{ID}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        </tr>
+    
+        {{/each}}
+    </tbody>
+</table>
+    <p>    <input type="submit" class="btn btn-success pull-right" value="Comprar"></p>
+
+
+</form>
+</div>
+<p><a href="/" class="btn btn-primary">Seguir Comprando</a></p>
+
+ </div>
+
