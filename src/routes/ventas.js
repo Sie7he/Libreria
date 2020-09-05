@@ -13,22 +13,11 @@ router.get('/pedido',isLoggedIn,isAut,  async (req,res) =>{
  });
  
  // Vemos el detalle de cada pedido 
- router.get('/detalle_venta/:id',isLoggedIn,isAut,  async (req,res) =>{
-    const {id} = req.params;
-    const detalle = await pool.query('select * from ventas_detalle where ID_PEDIDO = ?',[id]);
-    console.log(detalle);
-    res.render('ventas/detalle_venta', {detalle});
- });
 
-// Obtenemos el detalle de la compra a través de una vista para mostrarsela al cliente
- router.get('/boleta',isLoggedIn,  async (req,res) =>{
-   const rut = req.user.rut;
-   const boleta = await pool.query('SELECT * FROM `ventas_detalle` order by ID_PEDIDO DESC');
-   res.render('ventas/boleta',{b : boleta[0]});
+router.get('/detalle/:id',isLoggedIn,isAut, async (req,res)=>{
+     const detalle = await pool.query("Select * from detalle_venta where COD_PEDIDO = ?",req.params.id);
+     res.json(detalle);
 });
-
-
-
 
 
 module.exports = router;

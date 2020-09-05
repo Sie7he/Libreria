@@ -44,6 +44,8 @@ window.onload = actualizarTabla();
 
   });
 });
+
+
 function actualizarTabla(){
 var sum=0;
 $('.subtotal').each(function() {  
@@ -122,18 +124,3 @@ const getTiempoTotal = horaCero =>{
   cuenta('Sep 22 2020 01:39:00 GMT-0400','dias','horas','minutos','segundos'); 
 
 */
-function cargar_datos(){
-  $.ajax({
-    type: "GET",
-    url: '', 
-    dataType: "json",
-    success: function(data){
-      $.each(data,function(key, registro) {
-        $("#Select").append('<option value='+registro.id+'>'+registro.nombre+'</option>');
-      });        
-    },
-    error: function(data) {
-      alert('error');
-    }
-  });
-}

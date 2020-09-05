@@ -27,20 +27,25 @@ router.post('/signin', (req,res,next) =>{
         res.render('auth/signup');
     });
     
+    router.get('/regiones/:id', async (req,res) =>{
+        const comunas =  await pool.query('Select * from comunas where REGION_ID = ?',req.params.id);
+        res.json(comunas);
+    });
+    
     router.post('/signup', async (req,res) => {
-        var {RUT,NOMBRE,APELLIDO,DIRECCION,CORREO,PASS} = req.body;
+        const {RUT,NOMBRE,APELLIDO,COMUNA,DIRECCION,CORREO,PASS} = req.body;
         console.log(req.body);
 
-        try {
-            await pool.query('call REGISTRAR_CLIENTE(?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,PASS]);
+           try{
+            await pool.query('call REGISTRAR_CLIENTE(?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,PASS,COMUNA]);
             req.flash('success', 'Registrado Correctamente');
             res.redirect('/signin');
-        } catch (error) {
+        }catch(error){
             req.flash('message', error.sqlMessage);
             res.redirect('/signup');
-
-
         }
+
+        
       
     });
 

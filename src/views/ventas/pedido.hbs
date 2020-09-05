@@ -15,7 +15,9 @@
             <td>{{FECHA}}</td>
 
 
-          <td> <a href="detalle_venta/{{ID}}" class="btn btn-primary">Ver Detalle</a> </td>
+          <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="detalle({{ID}})">
+  Ver Detalle
+</button> </td>
 
        
             
@@ -26,5 +28,40 @@
 </tbody>
 
 </table>
-</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table id="ventas" class="table">
+            <thead>
+             <th>Libro</th>
+             <th>Cantidad</th>
+             <th>Precio</th>
+             <th>Total</th>
+             </thead>
+ <tfoot>
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td><strong><span id="ventas_total"></span></strong></td>
+
+        </tr>
+    </tfoot>
+    <tbody class="tbventas">
+
+    </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>  
 

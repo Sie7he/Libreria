@@ -50,6 +50,7 @@ router.get('/eliminarLibro/:id', async(req,res) =>{
             await pool.query("CALL DESCONTAR_STOCK(?,?)", [element.ID,req.body.CANTIDAD[contador-1]]);
        
            });
+           contador=0;
 
         carrito.forEach(async element => {
             contador +=1;
