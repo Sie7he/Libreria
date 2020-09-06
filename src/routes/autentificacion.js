@@ -34,10 +34,12 @@ router.post('/signin', (req,res,next) =>{
     
     router.post('/signup', async (req,res) => {
         const {RUT,NOMBRE,APELLIDO,COMUNA,DIRECCION,CORREO,PASS} = req.body;
-        console.log(req.body);
-
+        console.log(PASS);
+        const password = await helpers.encryptPassword(PASS);
+        
+        console.log(password);
            try{
-            await pool.query('call REGISTRAR_CLIENTE(?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,PASS,COMUNA]);
+            await pool.query('call REGISTRAR_CLIENTE(?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,password,COMUNA]);
             req.flash('success', 'Registrado Correctamente');
             res.redirect('/signin');
         }catch(error){

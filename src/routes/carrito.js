@@ -28,9 +28,13 @@ router.get('/eliminarLibro/:id', async(req,res) =>{
     delete cart[id];
     res.redirect('/carrito');
 
-
-
 });
+
+
+router.get('/limpiarCarrito', async (req,res) =>{
+    cart = req.session.cart = {};
+    res.redirect('/');
+})
 
  var contador = 0;
  router.post('/carrito', async (req,res) =>{

@@ -3,6 +3,7 @@ const pool = require('../database');
 const LocalStrategy = require('passport-local').Strategy;
 const helpers = require('./handlebars');
 
+/*
 passport.use('local.signin', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -17,8 +18,9 @@ passport.use('local.signin', new LocalStrategy({
     }
 }));
 
+*/
 // A través de el módulo passport realizamos un signin seguro
-/* passport.use('local.signin', new LocalStrategy({
+ passport.use('local.signin', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true
@@ -27,8 +29,12 @@ passport.use('local.signin', new LocalStrategy({
   if (rows.length > 0) {
     const user = rows[0];
     console.log(user);
-    const validPassword = await helpers.matchPassword(password, user.PASS);
-    console.log(validPassword);
+
+    const validPassword = await helpers.checkUser(password,user.PASS);
+
+    
+    console.log(user.PASS+" "+password+" "+ validPassword);
+    
     if (validPassword) {
       done(null, user, req.flash('success', 'Welcome ' + user.RUT_USUARIO));
     } else {
@@ -39,7 +45,12 @@ passport.use('local.signin', new LocalStrategy({
   }
 }));
 
-*/
+
+
+
+
+
+
 
 // Serializamos al usuario
 
