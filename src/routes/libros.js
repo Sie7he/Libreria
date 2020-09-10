@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn, isADM, isAut } = require('../lib/auth');
 const { session } = require('passport');
+const { json } = require('express');
 var cart = {};
 
 router.get('/agregar',isAut, (req,res) =>{
@@ -37,7 +38,9 @@ router.get('/search/:n', async (req,res) =>{
 router.get('/detalle/:id', async (req,res) =>{
     const {id} = req.params;
     const libro = await pool.query("SELECT ID,NOMBRE,AUTOR,IMAGEN,STOCK,SINOPSIS, REPLACE(FORMAT(PRECIO,0), ',', '.') AS PRECIO from libros where id = ?",[id]);
-    res.render('libros/detalle_libro',{libro : libro[0]});
+    const aut = libro[0];
+    const autor = await pool.query("SELECT * FROM libros WHERE AUTOR = ? and NOMBRE != ? order by ID desc limit 3",[aut.AUTOR,aut.NOMBRE]);
+    res.render('libros/detalle_libro',{libro : libro[0],autor});
  });
  
 
@@ -45,7 +48,7 @@ router.get('/detalle/:id', async (req,res) =>{
  // Realizamos la compra a través de un procedimimento almacenado
  router.post('/detalle/:id', isLoggedIn, async (req,res) =>{
     cart = req.session.cart;
-   
+
     if (!cart) {
         cart = req.session.cart = {}
     }
@@ -80,5 +83,7 @@ router.post('/editar/:id', async (req, res) => {
     req.flash('success','Libro Actualizado Correctamente')
     res.redirect('/libros/lista');
 });
+
+
 
 module.exports = router;

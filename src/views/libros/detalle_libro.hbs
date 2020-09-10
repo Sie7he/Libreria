@@ -9,12 +9,12 @@
         <img  src="{{libro.IMAGEN}}" witdh="210px" height="400px"> 
         </div>
         
-        <div class="col-xs-12 col-sm-4 col-md-3 border 1">
-          <div class="card" style="width: 21rem; border: none; text-align: justify;">
+        <div class="col-xs-12 col-sm-4 col-md-4 border 1">
+          <div class="card" style="width: 28rem; border: none; text-align: justify;">
   <div class="card-body">
     <h5 class="card-title">{{libro.NOMBRE}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{libro.AUTOR}}</h6>
-    <p class="card-text align-justify"> {{libro.SINOPSIS}}</p>
+    <p class="card-text"> {{libro.SINOPSIS}}</p>
   </div>
 </div>
         </div>
@@ -27,7 +27,7 @@
          
          <div class="box-info-product">
             <div class="form-group">
-                <span style="color: green;font-size: 21px;">Precio ${{libro.PRECIO}}</span>
+                <span style="color: rgb(18, 50, 138);font-size: 21px;">Precio ${{libro.PRECIO}}</span>
             </div>
             <div class="form-group">
                 <label name="STOCK" style="font-size: 21px;">Stock: {{libro.STOCK}}</label>
@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <input type='hidden' name='id' id="id" value='{{ID}}'>
                     <div class="input-group">
-                    <button type="submit"  class="btn btn-success btn-block" name="add" id='{{ID}}'>Agregar al carrito <i class='fas fa-shopping-cart'></i></button>
+                    <button type="submit" class="btn btn-success btn-block" name="add">Agregar al carrito <i class='fas fa-shopping-cart'></i></button>
                      </div>
                   </div>
                                    
@@ -59,7 +59,42 @@
          </div>
          </div>
     </div>
+    <div class="container p-4">
+
+{{#if autor}}
+      <h3 style="font-size: 35px; color: #fff; background-color: #376a94">Más Libros Del Mismo Autor</h3>
+{{/if}}
+    <div class="row">
+        {{#each autor}}
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-4">
+            <div class="card mx-auto" style="width: 14rem; border:hidden;">
+
+                <div class="card-body">
+                    <a href="/libros/detalle/{{ID}}">
+                    
+                    <img class="card-img-top" src="{{IMAGEN}}" witdh="200" height="250">
+                   
+                        
+                    </a>
+                </div>
+              <div class="pie" height="100px">
+                <div class="product-name">
+                <strong class="product-item-name">
+									{{NOMBRE}}
+									</strong>
+                  </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
         
+
+        {{/each}}
+
+    </div>
+
+    </div>
+
 </div>
 
    {{>footer}}

@@ -28,20 +28,14 @@ passport.use('local.signin', new LocalStrategy({
   const rows = await pool.query('SELECT * FROM registro_usuarios WHERE CORREO = ?', [username]);
   if (rows.length > 0) {
     const user = rows[0];
-    console.log(user);
 
     const validPassword = await helpers.checkUser(password,user.PASS);
-
-    
-    console.log(user.PASS+" "+password+" "+ validPassword);
     
     if (validPassword) {
-      done(null, user, req.flash('success', 'Welcome ' + user.RUT_USUARIO));
-    } else {
-      done(null, false, req.flash('message', 'Contraseña Incorrecta'));
-    }
+      done(null, user);
+    } 
   } else {
-    return done(null, false, req.flash('message', 'El Usuario No Existe'));
+    return done(null, false, req.flash('message', 'Usuario o Contraseña Incorrecta'));
   }
 }));
 

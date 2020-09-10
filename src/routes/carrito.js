@@ -6,6 +6,8 @@ const { isLoggedIn, isADM, isAut } = require('../lib/auth');
 var cart = {};
 
 
+
+
 router.get('/carrito', isLoggedIn, async (req,res) =>{
      cart= req.session.cart;
     if (!cart) {
@@ -14,7 +16,8 @@ router.get('/carrito', isLoggedIn, async (req,res) =>{
     const ids = Object.keys(cart)
     if (ids.length > 0) {
      const carrito = await pool.query("SELECT ID,NOMBRE,IMAGEN,STOCK, REPLACE(FORMAT(PRECIO,0), ',' , '.') AS PRECIO FROM libros WHERE ID IN  (?) ",[ids]);
-       res.render('carrito',{carrito});
+     const usuario = await pool.query("Select * from usuarios_detalle where rut = ? ",[req.user.rut]); 
+     res.render('carrito',{u : usuario[0],carrito});
     } else{
         req.flash('message','No hay elementos en el carrito');
         res.redirect('/');    
@@ -51,8 +54,7 @@ router.get('/limpiarCarrito', async (req,res) =>{
 
         carrito.forEach(async element => {
             contador +=1;
-            await pool.query("CALL DESCONTAR_STOCK(?,?)", [element.ID,req.body.CANTIDAD[contador-1]]);
-       
+            await pool.query("CALL DESCONTAR_STOCK(?,?)", [element.ID,parseInt(req.body.CANTIDAD[contador-1])]);
            });
            contador=0;
 
@@ -170,9 +172,18 @@ router.get('/limpiarCarrito', async (req,res) =>{
                     '<tr><td style="padding: 0 2.5em; text-align: left;">'+
                                 
                     '<div class="text"> <h2>Gracias por comprar en nuestra tienda!</h2>'+
-                      '</div></td><tr>'+              
-                      '<td style="padding: 0 2.5em; text-align: left;color: #000;">'+        
+                      '</div></td><tr>'+   
+                      '<td style="padding: 0 2.5em; text-align: left;color: #000;">'+
+                      '<strong> Código boleta: '+id+'</strong>'+
+                      '</td></tr>'+ 
+                      '<tr><td style="padding: 0 2.5em; text-align: left;color: #000;">'+
+                      '<strong>'+req.user.rut+'</strong>'+
+                      '</td></tr>'+                          
+                      '<tr><td style="padding: 0 2.5em; text-align: left;color: #000;">'+        
                       '<strong>'+req.user.nombre +" "+ req.user.apellido+'</strong> </td></tr>'+
+                      '<tr><td style="padding: 0 2.5em; text-align: left;color: #000;">'+
+                      '<strong>'+req.user.comuna+'</strong>'+
+                      '</td></tr>'+ 
                       '<tr><td style="padding: 0 2.5em; text-align: left;color: #000;">'+
                       '<strong>'+req.user.direccion+'</strong>'+
                       '</td></tr></tr></table></td></tr>'+

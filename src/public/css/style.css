@@ -1,16 +1,15 @@
-html,
 body {
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-}
-
-.footer  {
-    color: white;
-    background-color: #009B94;
-    width: 100%;
+    min-height: 100vh;
     position: relative;
-    bottom: 0;
+    padding-bottom: 287px;
+
+  }
+
+footer  {
+    color: white;
+    background-color: #376a94;
+    position: absolute;
+    bottom: 0 !important;
     width: 100%;
     height: 287px;
 
@@ -25,7 +24,10 @@ body {
     margin-bottom: 10px;
 }
 .navbar {
-    background: #009B94 !important;
+    background: #66c0f4;
+    background-image: url('https://store.cloudflare.steamstatic.com/public/images/v6/home/background_spotlight.jpg');
+    border-radius: 3px;
+    box-shadow: 0 0 4px #000;
 }
 
 h2{
@@ -165,7 +167,9 @@ word-wrap: break-word;
     border-top: 1px solid #b0afaf;
     border-bottom: 1px solid #b0afaf;
 }
-
+.active {
+    background: blue;
+}
 .product_attributes, .box-cart-bottom {
 
     box-shadow: inset 0 6px 6px rgba(0, 0, 0, 0.05);

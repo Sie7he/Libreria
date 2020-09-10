@@ -5,7 +5,7 @@ const { response } = require('express');
 const { isLoggedIn } = require('../lib/auth');
 const { serializeUser } = require('passport');
 const { isADM } = require('../lib/auth');
-
+const helpers = require('../lib/handlebars');
 
 router.get('/agregarUsuario',isLoggedIn,isADM, (req,res) =>{
     res.render('usuarios/agregarUsuario');
@@ -16,8 +16,10 @@ router.get('/agregarUsuario',isLoggedIn,isADM, (req,res) =>{
 que por seguridad verifica que el usuario que está ingresando datos sea un administrador*/
 router.post('/agregarUsuario', async (req,res) => {
     const RUTADM = req.user.rut;
-    const {RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,PASS,ROL} = req.body;
-    await pool.query('call AGREGAR_USUARIO(?,?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,ROL,PASS,RUTADM]);
+    console.log(RUTADM);
+    const {RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,PASS,ROL,COMUNA} = req.body;
+    const password = await helpers.encryptPassword(PASS);
+    await pool.query('call AGREGAR_USUARIO(?,?,?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,ROL,password,RUTADM,COMUNA]);
     req.flash('success', 'Usuario Guardado Correctamente');
     res.redirect('/usuarios/lista_usuarios');
 });
@@ -39,8 +41,8 @@ router.get('/lista_usuarios',isLoggedIn,isADM, async (req,res) =>{
  // Actualizamos a un usuario en la  base de datos con un procedimiento almacenado
 router.post('/editarUsuario/:rut', async (req, res) => {
     const RUTADM = req.user.rut;
-    const {RUT,NOMBRE,APELLIDO,CORREO,PASS,ROL} = req.body;
-    await pool.query('call ACTUALIZAR_USUARIO(?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,PASS,ROL,RUTADM]);
+    const {RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,ROL,COMUNA} = req.body;
+    await pool.query('call ACTUALIZAR_USUARIO(?,?,?,?,?,?,?,?)',[RUT,NOMBRE,APELLIDO,CORREO,DIRECCION,ROL,RUTADM,COMUNA]);
     req.flash('success', 'Usuario Actualizado Correctamente');
     res.redirect('/usuarios/lista_usuarios');
  

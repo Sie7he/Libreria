@@ -2,6 +2,7 @@
 /* Con buscar libros y buscar usuario filtramos la tabla para que aparezca
    el usuario o libro que estamos buscando al principio de la tabla*/
   
+
 window.onload = actualizarTabla();
 
     $('#buscar_usuario').keyup(function(){ 
@@ -12,7 +13,7 @@ window.onload = actualizarTabla();
         
         
     });
-
+;
     $('#buscar_libro').keyup(function(){ 
       let buscar = $(this).val();       
       $('#tablaLibros tr:gt(0)').filter(function() { 
@@ -28,9 +29,12 @@ window.onload = actualizarTabla();
 
   var filas=document.querySelectorAll("#miTabla tbody tr");
   var total=0;
-
+  let contador = 0;
     $('.CANTIDAD').bind('keyup mouseup',function() {
       $('#miTabla tbody tr').each(function() {
+        contador +=1;
+        $('#cart_menu_num').text(contador/3);
+
        var cantidad = $(this).find('input[type="number"]').val();
        var precio = $(this).find('td').eq(3).text().replace('.',''); 
        var subtotal = cantidad*precio; 
@@ -40,6 +44,7 @@ window.onload = actualizarTabla();
         $(this).find('td').eq(4).text(0);
 
       }
+      
        actualizarTabla();
 
   });
@@ -81,6 +86,12 @@ if(confirm("¿Desea Eliminar Al Usuario?")){
 
 
 
+$('.pagination li').click(function(e) {
+  $('.pagination li').removeClass('page-item active');
+  $(this).addClass('page-item active');
+});
+
+
 const getTiempoTotal = horaCero =>{
 
   let ahora = new Date(),
@@ -99,7 +110,8 @@ const getTiempoTotal = horaCero =>{
   };
   };
   
-  
+
+
   
   /*const cuenta = (cero,dias,horas,minutos,segundos) =>{
       const d = document.getElementById(dias);

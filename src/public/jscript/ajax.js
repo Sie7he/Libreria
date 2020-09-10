@@ -6,12 +6,10 @@ $("#region").change(function(){
         success : function(data){
 
             var len = data.length;
-            console.log(len);
             if(len<=0){
                 $("#comunas").empty();
                 $("#comunas").append("<option value='0'>Seleccione Su Comuna...</option>");
             }else{
-                console.log(data);
                 $("#comunas").empty();
                 for(var i =0; i<len;i++){
                 var value1 = data[i]['NOMBRE'];
@@ -31,7 +29,6 @@ function detalle(id){
         url : "/ventas/detalle/"+id,
         type : "GET",
         success : function(data){
-        console.log(data);
         $('.tbventas').empty();
              
         $.each(data, function(i, item) {
@@ -50,7 +47,6 @@ function detalle(id){
 
         }})
 };
-
 function tablaDetalle(){
     let sum =0;
     $('.totalD').each(function() {  
@@ -59,3 +55,27 @@ function tablaDetalle(){
      $('#ventas_total').text(sum);
      console.log(sum);
 }
+
+$(window).on("load",function() {
+    $.ajax({
+        url : "/pedido",
+        type : "GET",
+        success : function(data){
+        console.log(data);
+             
+        $.each(data, function(item) {
+                $('#tablaPedido').append(
+                $('<tr>'),
+                $('<td>').text(item.ID),
+                $('<td>').text(item.RUT_USUARIO),
+                $('<td>').text(item.FECHA)
+                
+            );
+    
+        }
+        );
+    
+        }});
+});
+    
+

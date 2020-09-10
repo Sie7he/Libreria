@@ -58,13 +58,13 @@
                 {{/equal}}
               
                    <li class="nav-item">
-                          <a class="nav-link" href="/carrito">Carrito<i class="fas fa-shopping-cart"></i></a>
+                          <a class="nav-link" href="/carrito"></i><span>Carrito</span><i class="fas fa-shopping-cart"></i></a>
+                            <span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle"></span>
                   </li>
                  <li class"nav-item">
-                             </div>
-                </div>
-
-        <a class="nav-link" href="/logout">Cerrar Sesion</a>
+              
+        <a class="nav-link" href="/logout">Cerrar Sesión <i class="fa fa-sign-out" aria-hidden="true"></i>
+</a>
       </li>
              {{else}}    
         <li class="nav-item">
@@ -75,6 +75,8 @@
         </li>
          {{/if}}
             </ul>
-               
+                            
+                </div>
+
 </nav>
 

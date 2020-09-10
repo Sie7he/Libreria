@@ -1,0 +1,93 @@
+ <div class="container p-4">
+ 
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Dirección de envío</h4>
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Nombre</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="{{u.nombre}}" readonly>
+           
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Escurra</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="{{u.apellido}}" readonly>
+            
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Email <span class="text-muted"></span></label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{u.correo}}">
+
+        </div>
+
+        <div class="mb-3">
+          <label for="address">Dirección</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" value="{{u.direccion}}" required>
+          <div class="invalid-feedback">
+            Please enter your shipping address.
+          </div>
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-4 mb-3">
+            <label for="state">Comuna</label>
+            <input type="text" class="form-control" id="Comuna" value="{{u.comuna}}">
+          </div>
+        </div>
+        <hr class="mb-4">
+      
+        <hr class="mb-4">
+
+        <h4 class="mb-3">Método de Pago</h4>
+
+        <div class="d-block my-3">
+          <div class="custom-control custom-radio">
+            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+            <label class="custom-control-label" for="credit">Tarjeta de Débito</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+            <label class="custom-control-label" for="debit">Tarjeta de Crédito</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="cc-name">Nombre de la Tarjeta</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+            <small class="text-muted">Full name as displayed on card</small>
+            <div class="invalid-feedback">
+              Name on card is required
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cc-number">Número de Tarjeta</label>
+            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+            <div class="invalid-feedback">
+              Credit card number is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="cc-expiration">Fecha de Expiración</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+            <div class="invalid-feedback">
+              Expiration date required
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="cc-cvv">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+            <div class="invalid-feedback">
+              Security code required
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Pagar</button>
+      </form>
+    </div>
+  </div>

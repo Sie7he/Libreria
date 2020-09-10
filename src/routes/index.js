@@ -7,11 +7,12 @@ const pool = require('../database');
 
 router.get('/', async (req,res) =>{
     
-    
-    const libros = await pool.query("SELECT ID, NOMBRE,AUTOR,IMAGEN, REPLACE(FORMAT(PRECIO,0), ',', '.') AS PRECIO from libros order by ID desc limit 0,12"); 
+    const libros = await pool.query("SELECT ID, NOMBRE,AUTOR,IMAGEN, REPLACE(FORMAT(PRECIO,0), ',', '.') AS PRECIO from libros order by ID desc limit 0,18"); 
+
     res.render('index', {libros});
  });
 
 
- 
+
+
 module.exports = router;    
