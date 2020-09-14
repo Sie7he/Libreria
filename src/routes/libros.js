@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn, isADM, isAut } = require('../lib/auth');
-const { session } = require('passport');
-const { json } = require('express');
 var cart = {};
 
 router.get('/agregar',isAut, (req,res) =>{
@@ -56,17 +54,6 @@ router.get('/detalle/:id', async (req,res) =>{
     cart[id] = (cart[id] || 0);
     res.redirect('/carrito');
 });
-
-   /*
-    const {PRECIO,CANTIDAD} = req.body;
-    const LIBRO = req.params.id;
-    const RUT = req.user.rut;
-    const nom = req.user.nombre;
-    await pool.query('CALL PEDIDO (?,?,?,?,?)',[null,RUT,LIBRO,PRECIO,CANTIDAD]);
-    req.flash('success', 'Gracias Por Su Compra',nom);
-    res.redirect('/ventas/boleta');
-  */
-
 
 
  router.get('/editar/:id', async (req,res) =>{

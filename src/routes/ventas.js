@@ -8,7 +8,7 @@ const { isLoggedIn, isADM , isAut } = require('../lib/auth');
 /* Obtenemos los pedidos a través de una consulta y los guardamos en la constante pedido
 para luego verlos en la vista */
 router.get('/pedido',isLoggedIn,isAut,  async (req,res) =>{
-    const pedido = await pool.query('Select * from pedido order by ID desc limit 0,12');
+    const pedido = await pool.query('SELECT * from pedido order by ID ASC limit 0,12');
     res.render('ventas/pedido', {pedido});
  });
  
@@ -18,6 +18,7 @@ router.get('/detalle/:id',isLoggedIn,isAut, async (req,res)=>{
      const detalle = await pool.query("Select * from detalle_venta where COD_PEDIDO = ?",req.params.id);
      res.json(detalle);
 });
+
 
 
 router.get('/pedido/page', async (req,res) =>{
@@ -45,8 +46,7 @@ router.get('/pedido/page', async (req,res) =>{
                limit
           }
      }
-     console.log(pedido)
-     res.json(results);
-     /*   res.render('ventas/pedido',{pedido});*/
+
+     res.render('ventas/pedido',{pedido});
   });
 module.exports = router;

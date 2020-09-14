@@ -30,13 +30,12 @@ passport.use('local.signin', new LocalStrategy({
     const user = rows[0];
 
     const validPassword = await helpers.checkUser(password,user.PASS);
-    
     if (validPassword) {
       done(null, user);
     } 
-  } else {
+  else {
     return done(null, false, req.flash('message', 'Usuario o Contraseña Incorrecta'));
-  }
+  } }
 }));
 
 

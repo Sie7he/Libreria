@@ -56,26 +56,4 @@ function tablaDetalle(){
      console.log(sum);
 }
 
-$(window).on("load",function() {
-    $.ajax({
-        url : "/pedido",
-        type : "GET",
-        success : function(data){
-        console.log(data);
-             
-        $.each(data, function(item) {
-                $('#tablaPedido').append(
-                $('<tr>'),
-                $('<td>').text(item.ID),
-                $('<td>').text(item.RUT_USUARIO),
-                $('<td>').text(item.FECHA)
-                
-            );
-    
-        }
-        );
-    
-        }});
-});
-    
 
