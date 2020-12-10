@@ -21,10 +21,14 @@ passport.use('local.signin', new LocalStrategy({
 */
 // A través de el módulo passport realizamos un signin seguro
  passport.use('local.signin', new LocalStrategy({
+
   usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true
-}, async (req, username, password, done) => {
+}, 
+
+async (req, username, password, done) => {
+
   const rows = await pool.query('SELECT * FROM registro_usuarios WHERE CORREO = ?', [username]);
   if (rows.length > 0) {
     const user = rows[0];

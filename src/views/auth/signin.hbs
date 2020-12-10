@@ -19,16 +19,16 @@
                     <h3>Iniciar Sesión</h3>
                 </div>
                 <div class="card-body">
-                    <form action="/signin" method="POST">
+                    <form method="POST" id="formLog">
                    
                     <div class="form-group">
-                        <input type="text" name="username" placeholder="Correo" class="form-control">
+                        <input type="text" id="username" name="username" placeholder="Correo" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" placeholder="Contaseña" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="Contaseña" class="form-control">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success btn-block">Entrar  <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                        <button class="btn btn-success btn-block" id="login_button">Entrar  <i class="fa fa-sign-in" aria-hidden="true"></i></button>
                     </div>
                     <div class="form-group">
                         <a href="signup" class="btn btn-primary btn-block">Registrarse</a>

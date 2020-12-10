@@ -12,14 +12,11 @@ router.get('/signin',isNotLoggedIn, (req,res) =>{
     res.render('auth/signin');
 });
 
-router.post('/signin', (req,res,next) =>{
-    
-    passport.authenticate('local.signin', {
-        successRedirect: '/',
-        failureRedirect: '/signin',
-        failureFlash: true
-      })(req, res, next);
-    });
+router.post('/signin', passport.authenticate('local.signin', {
+    successRedirect : '/', 
+    failureRedirect : '/signin', 
+    failureFlash : true 
+}));
 
  
     // El cliente se registra ocupando un procedimiento almacenado que siempre otorga el rol de cliente 

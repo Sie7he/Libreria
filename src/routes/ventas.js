@@ -8,7 +8,7 @@ const { isLoggedIn, isADM , isAut } = require('../lib/auth');
 /* Obtenemos los pedidos a través de una consulta y los guardamos en la constante pedido
 para luego verlos en la vista */
 router.get('/pedido',isLoggedIn,isAut,  async (req,res) =>{
-    const pedido = await pool.query('SELECT * from pedido order by ID ASC limit 0,12');
+    const pedido = await pool.query('SELECT pedido.*, usuarios.NOMBRE, usuarios.APELLIDO from pedido  INNER JOIN usuarios on pedido.RUT_USUARIO = usuarios.RUT order by ID ASC limit 0,12');
     res.render('ventas/pedido', {pedido});
  });
  
@@ -27,10 +27,11 @@ router.get('/pedido/page', async (req,res) =>{
      const page = parseInt(req.query.pg);
      const startIndex = (page-1)* limit;
      const endIndex = page * limit;
-     const pedido = await pool.query("SELECT * from pedido order by ID asc limit "+startIndex+","+"12"); 
-     const filas = await pool.query("Select count(ID) as cont from libros");
+     const pedido = await pool.query("SELECT pedido.*, usuarios.NOMBRE, usuarios.APELLIDO from pedido  INNER JOIN usuarios on pedido.RUT_USUARIO = usuarios.RUT order by ID asc limit "+startIndex+","+"12"); 
+     const filas = await pool.query("Select count(ID) as cont from pedido");
      const contador = filas[0].cont;
      const results = {};
+     console.log(pedido);
      results.results = JSON.parse(JSON.stringify(pedido));
 
      if (endIndex < contador){

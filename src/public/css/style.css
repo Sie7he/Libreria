@@ -5,6 +5,36 @@ body {
 
   }
 
+  .parallax {
+    /* The image used */
+    background-image: url('/img/mujer-libro.jpeg');
+    opacity: 0.77;
+  
+    /* Full height */
+    height: 70vh !important;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .parallax2 {
+    /* The image used */
+    background-image: url('https://kena.com/wp-content/uploads/2017/04/libromujer-759x498.jpg');
+    opacity: 0.77;
+  
+    /* Full height */
+    height: 70vh !important;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
 footer  {
     color: white;
     background-color: #376a94;
@@ -13,6 +43,10 @@ footer  {
     width: 100%;
     height: 300px;
 
+}
+
+#btnCargar{
+   float: right;
 }
   .pie{
     padding: 10px;
@@ -84,7 +118,7 @@ img{
     transition: all .9s ease;
 }
 
-img:hover{ 
+.card-img-top:hover{ 
     transition:all .9s ease;
     transform: scale(1.1)
 }
@@ -100,7 +134,9 @@ img:hover{
     font-size: 28px;
 }
 
-
+ul:hover{
+    cursor: pointer;
+}
 .product-name {
     margin-top: 2px;
     margin-bottom: 5px;

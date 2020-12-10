@@ -3,6 +3,10 @@
    el usuario o libro que estamos buscando al principio de la tabla*/
   
 
+  
+ 
+
+
 window.onload = actualizarTabla();
 
     $('#buscar_usuario').keyup(function(){ 
@@ -83,7 +87,5 @@ if(confirm("¿Desea Eliminar Al Usuario?")){
   }
 
 });
-
-
 
 

@@ -7,7 +7,7 @@ const session = require('express-session');
 const MYSQLStore = require('express-mysql-session');
 const passport = require('passport');
 const {database} = require('./keys');
-const https = require('https');
+var bodyParser = require('body-parser');
 
 //inicializacion
 
@@ -43,6 +43,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 //Variables Globales
 

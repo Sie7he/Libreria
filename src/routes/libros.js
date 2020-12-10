@@ -4,25 +4,69 @@ const pool = require('../database');
 const { isLoggedIn, isADM, isAut } = require('../lib/auth');
 var cart = {};
 
+
+
 router.get('/agregar',isAut, (req,res) =>{
+
     res.render('libros/agregar');
+    
 });
+router.post('/agregar', isAut, async (req,res) => {
+    try {
+     const {NOMBRE,AUTOR,IMAGEN,SINOPSIS,PRECIO,STOCK,ISBN} = req.body;
+     await pool.query('call AGREGAR_LIBROS(?,?,?,?,?,?,?)',[AUTOR,IMAGEN,NOMBRE,PRECIO,STOCK,SINOPSIS,ISBN]);
+     res.json('Libro Agregado Correctamente');
+
+    } catch (error) {
+        res.status(201);
+        console.log(error.sqlMessage);
+    }
+
+ });
+ 
+
+
+
+
 
 router.get('/lista', async (req,res) =>{
-    const librosEMP = await pool.query('Select * FROM libros');
-    res.render('libros/lista', {librosEMP});
+    
+    res.render("libros/lista");
+ 
  });
 
+ router.get('/listaAjax', async (req,res) =>{
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.size);
+    let startIndex = page* limit;
+    let orderby = (req.query.orderby === 'true');
+    const filas = await pool.query("Select count(ID) as cont from libros where estado = 1");
+    const contador = filas[0].cont;
+    let librosEMP= {};
+    if(orderby == false){
+         librosEMP = await pool.query("Select * FROM libros where estado = 1  order by NOMBRE asc limit "+startIndex+","+limit+""); 
+
+    }else {
+        librosEMP = await pool.query("Select * FROM libros where estado = 1  order by AUTOR asc limit "+startIndex+","+limit+""); 
+
+    }
+    console.log(orderby);
+
+    const response = {
+            "totalPages" : Math.ceil(contador/limit),
+            "pageNumber": page,  
+            "libros": librosEMP,
+
+    
+};
+    res.send(response);
  
+ });
+
 /* Obtenemos los datos del formulario y los guardamos en constantes,
 luego llamamos a un procedimiento almacenado para agregar libros pasandole los parámetros necesarios
 y ocupamos los signos de interrogación como parametros para evitar SQL Injection*/
-router.post('/agregar', isAut, async (req,res) => {
-    const {NOMBRE,AUTOR,IMAGEN,SINOPSIS,PRECIO,STOCK,ISBN} = req.body;
-    await pool.query('call AGREGAR_LIBROS(?,?,?,?,?,?,?)',[AUTOR,IMAGEN,NOMBRE,PRECIO,STOCK,SINOPSIS,ISBN]);
-    req.flash('success', 'Libro Guardado Correctamente');
-    res.redirect('/libros/lista');
-});
+
 
 /* Realizamos una busqueda donde usamos una funcion para concatenar y asi podemos buscar a través del "input search" 
 un libro o un autor*/
@@ -72,5 +116,18 @@ router.post('/editar/:id', async (req, res) => {
 });
 
 
+router.post('/eliminar/:id', async (req,res) =>{
+    try {
+        const {id} = req.params;
+        const rut = req.user.rut;
+        await pool.query("call ELIMINAR_LIBRO(?,?)", [rut,id]);
+        console.log(id);
+        res.json("Libro Eliminado");
+    } catch (error) {
+        console.log(error);
+    }
+   
+ 
+});
 
 module.exports = router;

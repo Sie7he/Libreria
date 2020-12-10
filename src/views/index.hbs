@@ -1,33 +1,11 @@
- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-     <a href="/libros/detalle/15"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/b/e/benner_pla_fchl_2.png" alt="First slide"  width="100%"></a>
-    </div>
-    <div class="carousel-item">
-     <a href="/libros/detalle/16"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/b/a/banner_el_poder_del_clic_fcl_web.jpg" alt="Second slide" width="100%"></a>
-    </div>
-    <div class="carousel-item">
-     <a href="/libros/detalle/17"> <img class="d-block" src="https://www.feriachilenadellibro.cl/pub/media/Plazathemes/bannerslider/images/f/e/feriachilena_5.png" alt="Third slide" width="100%"></a>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div class="container-fluid p-4">
-    
+<div class="parallax"></div>
 
-    <div class="row">
+<div class="container-fluid p-4">
+
+<div class="nav-sub">
+  <h2 style="text-align: center;">Ultimos Libros Agregados</h2>
+</div>
+    <div class="row" style="opacity: 0.9;">
         {{#each libros}}
         
         <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 mt-4">
@@ -69,4 +47,9 @@
 
     </div>
 </div>
+<div class="parallax2"></div>
+
+
+
+                        
    {{>footer}}
