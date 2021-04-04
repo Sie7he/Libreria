@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const { response } = require('express');
 const { isLoggedIn } = require('../lib/auth');
-const { serializeUser } = require('passport');
 const { isADM } = require('../lib/auth');
 const helpers = require('../lib/handlebars');
 

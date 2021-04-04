@@ -17,15 +17,8 @@ window.onload = actualizarTabla();
         
         
     });
-;
-    $('#buscar_libro').keyup(function(){ 
-      let buscar = $(this).val();       
-      $('#tablaLibros tr:gt(0)').filter(function() { 
-          $(this).toggle($(this).text().indexOf(buscar) > -1);         
-      });
-      
-      
-  });
+
+
 
   //Cada vez que se cambie el valor del input cantidad se calculara el total automáticamente
  

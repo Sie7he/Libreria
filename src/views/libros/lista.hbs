@@ -1,38 +1,35 @@
+<div class="container-fluid">
+  <h2>Libros</h2>
+  <br>
 
-<div class="container p-4 mx-auto">
-    <h2>Libros</h2>
-    <br>
-    <form>
-      <label for="orderby">Autor</label> 
-  <input type="checkbox" id="checkAutor" name="orderby">
-</form>
-<table class="table table-hover" id="tablaLibros" >
-  
-            
-  <thead class="thead-dark">
-  
+    <table class="table" id="tablaLibros">
+      <tbody>
+
+        <form method="GET">
+          <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" id="buscar_libro" name="buscarLibro" class="form-control" placeholder="Buscar Libro">
+          </div>
+        </form>
+  </tbody>
+
+  <thead>
+
     <th>Nombre</th>
     <th>Autor</th>
     <th>Stock</th>
     <th>Precio</th>
     <th>ISBN</th>
     <th colspan="2"></th>
-      </thead>  
-    
+  </thead>
 
-<tbody>
-</tbody>
 
-</table>
+  </table>
 
-<button onclick="libros()"  id="btnCargar" class="btn btn-success">Cargar tabla</button>
-<button id="btnAutor">Autor</button>
+  <button onclick="libros()" id="btnCargar" class="btn btn-success">Cargar tabla</button>
 
-<ul class="pagination justify-content-center" style="margin:20px 0">
-</ul>
+  <ul class="pagination justify-content-center" style="margin:20px 0">
+  </ul>
 
 
 </div>
-
-
-

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const { response } = require('express');
 const { isLoggedIn, isADM , isAut } = require('../lib/auth');
 
 

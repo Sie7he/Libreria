@@ -25,57 +25,56 @@ router.post('/agregar', isAut, async (req,res) => {
  });
  
 
-
-
-
-
-router.get('/lista', async (req,res) =>{
+ router.get('/lista', async (req,res) =>{
     
     res.render("libros/lista");
  
  });
 
+
  router.get('/listaAjax', async (req,res) =>{
-    let page = parseInt(req.query.page);
-    let limit = parseInt(req.query.size);
-    let startIndex = page* limit;
-    let orderby = (req.query.orderby === 'true');
-    const filas = await pool.query("Select count(ID) as cont from libros where estado = 1");
-    const contador = filas[0].cont;
-    let librosEMP= {};
-    if(orderby == false){
-         librosEMP = await pool.query("Select * FROM libros where estado = 1  order by NOMBRE asc limit "+startIndex+","+limit+""); 
+     try {
 
-    }else {
-        librosEMP = await pool.query("Select * FROM libros where estado = 1  order by AUTOR asc limit "+startIndex+","+limit+""); 
-
-    }
-    console.log(orderby);
-
-    const response = {
-            "totalPages" : Math.ceil(contador/limit),
-            "pageNumber": page,  
-            "libros": librosEMP,
-
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+        let startIndex = page* limit;
+        let orderby = (req.query.orderby === 'true');
+        const filas = await pool.query("Select count(ID) as cont from libros where estado = 1");
+        const contador = filas[0].cont;
+        let librosEMP= {};
+        if(orderby == false){
+             librosEMP = await pool.query("Select * FROM libros where estado = 1  order by NOMBRE asc limit "+startIndex+","+limit+""); 
     
-};
-    res.send(response);
- 
+        }else {
+            librosEMP = await pool.query("Select * FROM libros where estado = 1  order by AUTOR asc limit "+startIndex+","+limit+""); 
+    
+        }
+    
+        const response = {
+                "totalPages" : Math.ceil(contador/limit),
+                "pageNumber": page,  
+                "libros": librosEMP,
+    
+        
+    };
+     
+        res.json(response);
+    } catch (error) {
+        console.warn(error);
+    }
+   
  });
 
-/* Obtenemos los datos del formulario y los guardamos en constantes,
-luego llamamos a un procedimiento almacenado para agregar libros pasandole los parámetros necesarios
-y ocupamos los signos de interrogación como parametros para evitar SQL Injection*/
 
 
-/* Realizamos una busqueda donde usamos una funcion para concatenar y asi podemos buscar a través del "input search" 
-un libro o un autor*/
+
 router.get('/search/:n', async (req,res) =>{
     const n = req.query.n;
     const libros = await pool.query('Select * from libros where CONCAT_WS("",NOMBRE,AUTOR) like ?','%'+[n]+'%');
     res.render('libros/search', {libros});
  });
  
+
 
 router.get('/detalle/:id', async (req,res) =>{
     const {id} = req.params;
